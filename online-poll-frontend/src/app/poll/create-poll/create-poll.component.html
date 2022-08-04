@@ -1,0 +1,65 @@
+<div class="m-2">
+  <h1>Create poll</h1>
+  <h3>Select type</h3>
+  <div class="flex flex-column align-items-center justify-content-center p-2">
+    <p-selectButton [options]="['text', 'time']"
+                    [(ngModel)]="poll.config.type"></p-selectButton>
+    <h5>Add Options Enabled</h5>
+    <p-inputSwitch [(ngModel)]="poll.config.addOptionsEnabled"></p-inputSwitch>
+    <h5>Add Options Enabled</h5>
+    <p-inputSwitch [(ngModel)]="poll.config.secretVotingEnabled"></p-inputSwitch>
+    <div class="field col-12 md:col-4">
+      <label for="validTo">Valid to</label>
+      <p-calendar id="validTo"
+                  inputId="basic"
+                  [(ngModel)]="poll.config.validTo"></p-calendar>
+    </div>
+  </div>
+
+  <div class="field">
+        <span class="p-float-label">
+            <input id="question"
+                   class="w-full"
+                   [(ngModel)]="poll.name"
+                   type="text"
+                   required="true"
+                   pInputText>
+            <label for="question">Question</label>
+        </span>
+  </div>
+
+  <div *ngFor="let option of poll.options; index as i"
+       class="flex flex-row mt-5">
+        <span class="p-float-label flex-grow-1">
+            <input id="option-{{ i }}"
+                   type="text"
+                   required="true"
+                   class="w-full"
+                   [(ngModel)]="option.option"
+                   pInputText>
+            <label for="option-{{ i }}">Option #{{i + 1}}</label>
+        </span>
+    <button pButton
+            pRipple
+            type="button"
+            icon="pi pi-times"
+            class="p-button-rounded p-button-danger p-button-text flex-shrink-0"></button>
+  </div>
+  <div class="flex justify-content-end p-2">
+    <button pButton
+            pRipple
+            (click)="addOption()"
+            type="button"
+            icon="pi pi-plus"
+            class="p-button-rounded"></button>
+  </div>
+  <div class="flex p-2">
+    <button pButton
+            pRipple
+            type="button"
+            (click)="save()"
+            label="Save"
+            class="p-button-rounded p-button-success"></button>
+  </div>
+  {{poll | json}}
+</div>

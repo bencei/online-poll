@@ -1,0 +1,16 @@
+// poll/poll.proto
+syntax = "proto3";
+
+package poll;
+
+service PollService {
+  rpc FindOne (Id) returns (Poll);
+}
+
+message Id {
+  int32 id = 1;
+}
+
+message Poll {
+
+}

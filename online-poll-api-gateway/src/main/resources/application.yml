@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: true
+    admin:
+      enabled: true
+server:
+  port: 8765
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      base-path: "/actuator"
+      exposure:
+        include: "*"
+
