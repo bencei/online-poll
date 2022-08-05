@@ -4,11 +4,12 @@ import { PollController } from './poll.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PollDocument } from './document/poll.document';
 import { PollOptionDocument } from './document/poll-option.document';
-import { ClientsModule, Transport } from '@nestjs/microservices';
+import { PollEventsGateway } from './poll-events.gateway';
 
 @Module({
   imports: [TypeOrmModule.forFeature([PollDocument, PollOptionDocument])],
   controllers: [PollController],
-  providers: [PollService],
+  providers: [PollService, PollEventsGateway],
+  exports: [PollEventsGateway],
 })
 export class PollModule {}

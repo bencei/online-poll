@@ -3,7 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { MongoRepository } from 'typeorm';
 import { PollDocument } from './document/poll.document';
 import { ObjectId } from 'mongodb';
-import { CreateVoteRequest, Poll } from 'online-poll-core';
+import { CreateVoteRequest } from 'online-poll-core';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 
 @Injectable()
 export class PollService {
@@ -12,6 +13,7 @@ export class PollService {
   constructor(
     @InjectRepository(PollDocument)
     private _pollRepository: MongoRepository<PollDocument>,
+    private eventEmitter: EventEmitter2,
   ) {}
 
   create(createPollDto: PollDocument) {
@@ -21,7 +23,7 @@ export class PollService {
   }
 
   async addVote(request: CreateVoteRequest) {
-    this.log.debug(`Add vote to poll: ${request}`);
+    this.log.debug(`Add vote to poll: ${JSON.stringify(request)}`);
     const poll = await this._pollRepository.findOneBy(request.pollId);
     const option = poll.options.find(
       (elem) => elem._id.toString() === request.options[0]._id.toString(),
@@ -31,6 +33,7 @@ export class PollService {
       name: request.name,
       anonymously: request.anonymously,
     });
+    this.eventEmitter.emit('vote.created', poll);
     await this._pollRepository.update(request.pollId.toString(), poll);
   }
 

@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { PollOptionDocument } from './poll/document/poll-option.document';
 import { PollDocument } from './poll/document/poll.document';
 import { PollModule } from './poll/poll.module';
-import { ClientsModule, Transport } from '@nestjs/microservices';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
@@ -17,6 +17,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       password: 'poll123',
       entities: [PollDocument, PollOptionDocument],
     }),
+    EventEmitterModule.forRoot(),
     PollModule,
   ],
   controllers: [AppController],

@@ -1,0 +1,6 @@
+<h3>{{ poll?.name }}</h3>
+<div *ngFor="let option of poll?.options"
+     class="shadow-2 p-4 mt-4 mb-4 flex justify-content-between">
+  <span>{{ option.option }}</span>
+  <span>{{ option.votes.length }}</span>
+</div>
