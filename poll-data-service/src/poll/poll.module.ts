@@ -4,6 +4,7 @@ import { PollController } from './poll.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PollDocument } from './document/poll.document';
 import { PollOptionDocument } from './document/poll-option.document';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [TypeOrmModule.forFeature([PollDocument, PollOptionDocument])],

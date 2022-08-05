@@ -1,7 +1,7 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { PollService } from './poll.service';
 
-@Controller('poll')
+@Controller('vote/poll')
 export class PollController {
   constructor(private readonly pollService: PollService) {}
 

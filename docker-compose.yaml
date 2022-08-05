@@ -1,7 +1,12 @@
-# Use root/example as user/password credentials
-version: '3.1'
+version: '3.6'
 
 services:
+  redis:
+    image: 'redis'
+    ports:
+      - '6379:6379'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
   mongo:
     image: mongo
     container_name: online_poll_mongo

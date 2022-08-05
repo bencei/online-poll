@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { PollOptionDocument } from './poll/document/poll-option.document';
 import { PollDocument } from './poll/document/poll.document';
 import { PollModule } from './poll/poll.module';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [

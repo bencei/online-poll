@@ -1,15 +1,8 @@
-import { PollConfig } from './poll-config';
-import { PollOption } from './poll-option';
-
-export interface Poll {
-    id?: string,
-    name: string,
-    options: PollOption[],
-    config: PollConfig
-}
+import { Poll, PollConfig, PollOption } from "online-poll-core";
+import { ObjectId } from "mongodb";
 
 export class PollDto implements Poll {
-    id?: string | undefined;
+    _id?: ObjectId;
     name: string = '';
     options: PollOption[] = [];
     config: PollConfig = new PollConfig();

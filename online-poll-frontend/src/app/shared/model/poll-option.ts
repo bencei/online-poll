@@ -1,9 +1,9 @@
-export interface PollOption {
-    id?: string,
-    option: string | Date
-}
+import { PollOption, Vote } from "online-poll-core";
+import { ObjectId } from "mongodb";
 
 export class PollOptionDto implements PollOption {
-    id?: string | undefined;
-    option: string | Date = '';
+  _id?: ObjectId;
+  option: string | Date = '';
+  votes: Vote[] = [];
 }
+

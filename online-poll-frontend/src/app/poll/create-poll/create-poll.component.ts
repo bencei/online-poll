@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Poll, PollDto } from 'src/app/shared/model/poll';
-import { PollType } from 'src/app/shared/model/poll-config';
-import { PollOption, PollOptionDto } from 'src/app/shared/model/poll-option';
+import { PollDto } from 'src/app/shared/model/poll';
+import { PollOptionDto } from 'src/app/shared/model/poll-option';
 import { PollService } from '../poll.service';
+import { Poll } from "online-poll-core";
+import { PollType } from "online-poll-core";
 
 @Component({
   selector: 'app-create-poll',

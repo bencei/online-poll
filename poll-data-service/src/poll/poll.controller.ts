@@ -1,23 +1,17 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
-import { ObjectId } from 'mongodb';
+import { Body, Controller, Get, Logger, Param, Post, } from '@nestjs/common';
 import { PollService } from './poll.service';
-import { Poll } from 'online-poll-core';
+import { CreateVoteRequest } from 'online-poll-core';
 import { PollDocument } from './document/poll.document';
+import { MessagePattern } from '@nestjs/microservices';
 
 @Controller('poll')
 export class PollController {
+  private readonly log = new Logger(PollController.name);
+
   constructor(private readonly pollService: PollService) {}
 
   @Post()
-  create(@Body() createPollDto: Poll) {
+  create(@Body() createPollDto: PollDocument) {
     return this.pollService.create(createPollDto);
   }
 
@@ -29,6 +23,13 @@ export class PollController {
   @Get(':id')
   findOne(@Param('id') id: string): Promise<PollDocument> {
     return this.pollService.findOne(id);
+  }
+
+  @MessagePattern('vote')
+  async getVote(data: CreateVoteRequest) {
+    this.log.debug(`Vote received: ${JSON.stringify(data)}`);
+    await this.pollService.addVote(data);
+    return data;
   }
 
   /*@Patch(':id')

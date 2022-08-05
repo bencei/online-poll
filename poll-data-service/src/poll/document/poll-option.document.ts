@@ -1,6 +1,7 @@
 import { Column, Entity, ObjectIdColumn } from 'typeorm';
 import { ObjectId } from 'mongodb';
 import { PollOption } from 'online-poll-core';
+import { VoteDocument } from './vote.document';
 
 @Entity()
 export class PollOptionDocument implements PollOption {
@@ -9,4 +10,7 @@ export class PollOptionDocument implements PollOption {
 
   @Column()
   option: string | Date;
+
+  @Column()
+  votes: VoteDocument[] = [];
 }

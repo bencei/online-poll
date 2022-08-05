@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Poll } from '../shared/model/poll';
+import { Poll } from "online-poll-core";
 
 @Injectable({
   providedIn: 'root'

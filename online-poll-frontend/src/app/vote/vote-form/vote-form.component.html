@@ -1,10 +1,11 @@
 <div class="m-2">
-  <h1>Poll question</h1>
+  <h1>{{ poll?.name }}</h1>
   <div class="field">
         <span class="p-float-label">
             <input id="voter-name"
                    class="w-full"
                    type="text"
+                   [(ngModel)]="vote.name"
                    required="true"
                    pInputText>
             <label for="voter-name">Name</label>
@@ -13,36 +14,28 @@
   <div class="field-checkbox">
     <p-checkbox id="anonymous"
                 [binary]="true"
+                [(ngModel)]="vote.anonymously"
                 inputId="anonymous"></p-checkbox>
     <label for="anonymous">Vote anonymously</label>
   </div>
   <h5>Options</h5>
-  <!--div class="field-radiobutton">
-    <p-radioButton id="city1"
+  <div *ngFor="let option of poll?.options; index as i"
+       class="field-radiobutton">
+    <p-radioButton id="option-{{i}}"
                    name="city"
-                   value="Chicago"
+                   [(ngModel)]="selectedPoll"
+                   (ngModelChange)="addVoteOption($event)"
+                   [value]="option"
+                   [label]="option.option.toString()"
                    inputId="city1"></p-radioButton>
-    <label for="city1">Chicago</label>
   </div>
-  <div class="field-radiobutton">
-    <p-radioButton id="city2"
-                   name="city"
-                   value="Los Angeles"
-                   inputId="city2"></p-radioButton>
-    <label for="city2">Los Angeles</label>
+  <div class="flex p-2">
+    <button pButton
+            pRipple
+            (click)="save()"
+            type="button"
+            label="Send"
+            class="p-button-rounded p-button-success"></button>
   </div>
-  <div class="field-radiobutton">
-    <p-radioButton id="city3"
-                   name="city"
-                   value="New York"
-                   inputId="city3"></p-radioButton>
-    <label for="city3">New York</label>
-  </div>
-  <div class="field-radiobutton">
-    <p-radioButton id="city4"
-                   name="city"
-                   value="San Francisco"
-                   inputId="city4"></p-radioButton>
-    <label for="city4">San Francisco</label>
-  </div-->
+  <p>{{ vote | json }}</p>
 </div>

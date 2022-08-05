@@ -10,3 +10,4 @@
 | online-poll-api-gateway         | 8765  | Spring Cloud Gateway                                                           |
 | poll-data-service mongo         | 27017 | MongoDB for poll-data-service                                                  |
 | poll-data-service mongo-express | 8081  | Express MongoDB explorer for poll-data-service                                 |
+| redis                           | 6379  | PubSub Integration point                                                       |
